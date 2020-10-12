@@ -41,9 +41,11 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
         holder.email.setText(dataList.get(position).getEmail());
         holder.gender.setText(dataList.get(position).getGender());
 
-        holder.first_name.setText(dataList.get(position).getName().getFirst_name());
-        holder.last_name.setText(dataList.get(position).getName().getLast_name());
-        Picasso.with(holder.image.getContext()).load("https://picsum.photos/200/300").into(holder.image);
+        holder.name.setText(dataList.get(position).getName().getFirst_name()+" "+dataList.get(position).getName().getLast_name());
+
+        //holder.first_name.setText(dataList.get(position).getName().getFirst_name());
+        //holder.last_name.setText(dataList.get(position).getName().getLast_name());
+        Picasso.with(holder.image.getContext()).load(dataList.get(position).getName().getImage()).resize(400,500).into(holder.image);
 
 
         holder.mobile.setText(dataList.get(position).getContact().getMobile());
@@ -59,13 +61,13 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
 
     public class NoticeViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView id, first_name, last_name, email, gender, mobile, home, office;
+        public TextView id, first_name, last_name, email, gender, mobile, home, office,name;
         ImageView image;
 
         NoticeViewHolder(View itemView) {
             super(itemView);
             id = itemView.findViewById(R.id.id);
-            //name =  itemView.findViewById(R.id.name);
+            name =  itemView.findViewById(R.id.name);
             email =  itemView.findViewById(R.id.email);
             gender =  itemView.findViewById(R.id.gender);
             mobile =  itemView.findViewById(R.id.mobile);
@@ -73,8 +75,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
             office =  itemView.findViewById(R.id.office);
 
             image = itemView.findViewById(R.id.imageView);
-            first_name = itemView.findViewById(R.id.first_name);
-            last_name = itemView.findViewById(R.id.last_name);
+
         }
     }
 }
