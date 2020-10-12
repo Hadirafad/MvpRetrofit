@@ -5,11 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mvpretrofit.MainActivity;
 import com.example.mvpretrofit.R;
 import com.example.mvpretrofit.RecyclerItemClickListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import model.Notice;
@@ -17,6 +20,7 @@ import model.Notice;
 public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder> {
 
     public ArrayList<Notice> dataList;
+    Context context;
 
 
     public NoticeAdapter(ArrayList<Notice> dataList) {
@@ -33,9 +37,14 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
     @Override
     public void onBindViewHolder(NoticeViewHolder holder, int position) {
         holder.id.setText(dataList.get(position).getId());
-        holder.name.setText(dataList.get(position).getName());
+        //holder.name.setText(dataList.get(position).getName());
         holder.email.setText(dataList.get(position).getEmail());
         holder.gender.setText(dataList.get(position).getGender());
+
+        holder.first_name.setText(dataList.get(position).getName().getFirst_name());
+        holder.last_name.setText(dataList.get(position).getName().getLast_name());
+        Picasso.with(holder.image.getContext()).load("https://picsum.photos/200/300").into(holder.image);
+
 
         holder.mobile.setText(dataList.get(position).getContact().getMobile());
         holder.home.setText(dataList.get(position).getContact().getHome());
@@ -50,18 +59,22 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
 
     public class NoticeViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView id, name, email, gender, mobile, home, office;
+        public TextView id, first_name, last_name, email, gender, mobile, home, office;
+        ImageView image;
 
         NoticeViewHolder(View itemView) {
             super(itemView);
             id = itemView.findViewById(R.id.id);
-            name =  itemView.findViewById(R.id.name);
+            //name =  itemView.findViewById(R.id.name);
             email =  itemView.findViewById(R.id.email);
             gender =  itemView.findViewById(R.id.gender);
             mobile =  itemView.findViewById(R.id.mobile);
             home =  itemView.findViewById(R.id.home);
             office =  itemView.findViewById(R.id.office);
 
+            image = itemView.findViewById(R.id.imageView);
+            first_name = itemView.findViewById(R.id.first_name);
+            last_name = itemView.findViewById(R.id.last_name);
         }
     }
 }

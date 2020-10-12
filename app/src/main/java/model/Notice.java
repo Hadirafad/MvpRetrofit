@@ -6,7 +6,7 @@ public class Notice {
     @SerializedName("id")
     private String id;
     @SerializedName("name")
-    private String name;
+    private Name name;
     @SerializedName("email")
     private String email;
     @SerializedName("gender")
@@ -23,11 +23,11 @@ public class Notice {
         this.id = id;
     }
 
-    public String getName() {
+    public Name getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Name name) {
         this.name = name;
     }
 
