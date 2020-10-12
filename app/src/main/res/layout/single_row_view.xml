@@ -16,6 +16,14 @@
         android:orientation="vertical"
         android:padding="5dp">
 
+
+        <RadioButton
+            android:id="@+id/rid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:textStyle="bold" />
+
         <!-- Text Notice Name -->
         <TextView
             android:id="@+id/id"
@@ -29,13 +37,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="3dp" />
-
-
-
-
-
-        <!-- Text Notice FilePath -->
-
 
         <TextView
             android:id="@+id/email"

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +22,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
 
     public ArrayList<Notice> dataList;
     Context context;
-
+    private int lastSelectedPosition = -1;
 
     public NoticeAdapter(ArrayList<Notice> dataList) {
         this.dataList = dataList;
@@ -52,6 +53,9 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
         holder.home.setText(dataList.get(position).getContact().getHome());
         holder.office.setText(dataList.get(position).getContact().getOffice());
 
+        holder.rid.setChecked(lastSelectedPosition == position);
+
+
     }
 
     @Override
@@ -61,8 +65,10 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
 
     public class NoticeViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView id, first_name, last_name, email, gender, mobile, home, office,name;
+        public TextView id, email, gender, mobile, home, office,name;
         ImageView image;
+        public RadioButton rid;
+
 
         NoticeViewHolder(View itemView) {
             super(itemView);
@@ -76,6 +82,17 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
 
             image = itemView.findViewById(R.id.imageView);
 
+
+            rid = itemView.findViewById(R.id.rid);
+
+            rid.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lastSelectedPosition = getAdapterPosition();
+                    notifyDataSetChanged();
+
+                }
+            });
         }
     }
 }
