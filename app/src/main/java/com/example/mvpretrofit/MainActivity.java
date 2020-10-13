@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
@@ -77,11 +77,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                //noticeList.remove(viewHolder.getAdapterPosition());
                 adapter.dataList.remove(viewHolder.getAdapterPosition());
                 adapter.notifyDataSetChanged();
 
-
+                Toast.makeText(getApplicationContext(),"Item Removed",Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
 
