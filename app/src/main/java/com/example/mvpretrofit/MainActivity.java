@@ -1,10 +1,16 @@
 package com.example.mvpretrofit;
 
+import android.graphics.Color;
+import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -30,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
         /** Create handle for the RetrofitInstance interface*/
         GetNoticeDataService service = RetroFitInstance.getRetrofitInstance().create(GetNoticeDataService.class);
 
@@ -53,13 +58,32 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /** Method to generate List of notice using RecyclerView with custom adapter*/
+
+    /**
+     * Method to generate List of notice using RecyclerView with custom adapter
+     */
     private void generateNoticeList(ArrayList<Notice> noticeArrayList) {
         recyclerView = findViewById(R.id.recycler_view_employee_list);
         adapter = new NoticeAdapter(noticeArrayList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-    }
 
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                //noticeList.remove(viewHolder.getAdapterPosition());
+                adapter.dataList.remove(viewHolder.getAdapterPosition());
+                adapter.notifyDataSetChanged();
+
+
+            }
+        }).attachToRecyclerView(recyclerView);
+
+    }
 }

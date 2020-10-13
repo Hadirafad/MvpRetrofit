@@ -8,11 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.mvpretrofit.MainActivity;
 import com.example.mvpretrofit.R;
-import com.example.mvpretrofit.RecyclerItemClickListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -44,10 +41,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
 
         holder.name.setText(dataList.get(position).getName().getFirst_name()+" "+dataList.get(position).getName().getLast_name());
 
-        //holder.first_name.setText(dataList.get(position).getName().getFirst_name());
-        //holder.last_name.setText(dataList.get(position).getName().getLast_name());
         Picasso.with(holder.image.getContext()).load(dataList.get(position).getName().getImage()).resize(400,500).into(holder.image);
-
 
         holder.mobile.setText(dataList.get(position).getContact().getMobile());
         holder.home.setText(dataList.get(position).getContact().getHome());
